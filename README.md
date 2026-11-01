@@ -168,3 +168,16 @@ Con las pruebas que hicimos, ACO fue el método que consiguió la ruta más cort
 Algo que me quedó claro al comparar los tres métodos es que no siempre se necesita un algoritmo complejo para mejorar un recorrido. El vecino más cercano ya consiguió reducir bastante la distancia frente a la ruta manual. ACO logró mejorar ese resultado un poco más, así que puede ser una alternativa interesante si se trabaja con más clientes o si se necesita aprovechar mejor cada kilómetro.
 
 De todas formas, para pensar en usarlo en una empresa todavía habría que hacer pruebas con calles reales, varios vehículos y horarios de entrega. También sería necesario mejorar la forma en que se guardan y protegen los datos de los clientes.
+
+## Cómo ejecutarlo
+
+```bash
+pip install -r requirements.txt
+# Solo en Mac: el driver ODBC 18 necesita OpenSSL 3
+export DYLD_LIBRARY_PATH=/opt/homebrew/opt/openssl@3/lib
+
+python init_db.py                      # crea la tabla Clientes
+python escribir.py                     # inserta los 12 clientes (solo una vez)
+python algoritmo-aco.py                # versión original: una ejecución de ACO
+python experimentos.py --corridas 30   # compara los 3 métodos y guarda los resultados en SQL Server
+```
