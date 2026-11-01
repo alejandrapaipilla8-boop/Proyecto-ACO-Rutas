@@ -1,0 +1,5 @@
+from sql_auth import engine
+from models import Base
+
+Base.metadata.create_all(engine)
+print("Tablas creadas correctamente")

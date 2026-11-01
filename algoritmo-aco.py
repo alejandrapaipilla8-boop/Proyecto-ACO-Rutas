@@ -2,12 +2,29 @@ import math
 import random
 import numpy as np
 
-# Coordenadas de los 12 clientes
+from sql_auth import engine
+from sqlalchemy.orm import Session
+from models import Cliente
+
+
+
+with Session(engine) as session:
+    registros = session.query(Cliente).order_by(
+        Cliente.id_cliente
+    ).all()
+
+
 clientes = {
-    1: (0, 0),   2: (5, 3),   3: (8, 6),   4: (2, 7),
-    5: (-3, 4),  6: (6, -2),  7: (10, 8),  8: (-5, -3),
-    9: (4, -5), 10: (9, 2), 11: (-2, 6), 12: (7, -4)
+    i + 1: (float(c.coordenada_x), float(c.coordenada_y))
+    for i, c in enumerate(registros)
 }
+
+
+ids_clientes = {
+    i + 1: c.id_cliente
+    for i, c in enumerate(registros)
+}
+
 
 # Calcular distancia entre dos puntos
 def calcular_distancia(p1, p2):
@@ -80,6 +97,6 @@ for it in range(iteraciones):
 # Mostrar resultados
 print("\n" + "="*50)
 print("🏆 MEJOR RUTA ENCONTRADA:")
-print(" → ".join(f"C{c}" for c in mejor_ruta))
+print(" → ".join(f"C{ids_clientes[c]}" for c in mejor_ruta))
 print(f"📏 Distancia total: {mejor_distancia:.2f} km")
 print("="*50)

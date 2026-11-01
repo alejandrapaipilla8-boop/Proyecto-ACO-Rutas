@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.env
+resultados/*.csv
+.DS_Store
+~$*
+*.docx
+ANALISIS.md
+analisis.py
+consultas.sql
+resultados/*.md

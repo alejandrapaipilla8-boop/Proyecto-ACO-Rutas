@@ -1,0 +1,6 @@
+numpy
+SQLAlchemy
+pyodbc
+pandas
+matplotlib
+tabulate
